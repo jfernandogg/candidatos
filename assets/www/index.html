@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Candidatos al Congreso</title>
+  
+  
+   
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("online", onOnline, false);
+        document.addEventListener("onoffline", onOffline, false);
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+    	return true;
+    }
+
+    // Handle the online event
+    //
+    function onOnline() {
+    	$("#mensaje").text("");
+    	return true;
+    }
+    
+    function onOffline() {
+    	$("#mensaje").text("No hay internet.");
+    	return true;
+    }
+
+    </script>   
+  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
+  
+  <!-- Extra Codiqa features -->
+  <link rel="stylesheet" href="codiqa.ext.css">
+  
+  <!-- jQuery and jQuery Mobile -->
+  <script src="jquery-1.9.1.min.js"></script>
+  <script src="jquery.mobile-1.3.1.min.js"></script>
+
+  <!-- Extra Codiqa features -->
+  <script src="codiqa.ext.js"></script>
+
+
+</head>
+
+<body onload="onLoad()">
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Candidatos
+        </h3>
+    	<div id="mensaje"></div>
+ 		<script src="http://congresovisible.org/api/widget/listado/"></script>
+    </div>
+
+</div>
+</body>
+</html>
