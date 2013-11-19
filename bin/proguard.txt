@@ -1,3 +1,0 @@
-# view AndroidManifest.xml #generated:37
--keep class my.cordova.project.CordovaExample { <init>(...); }
-
