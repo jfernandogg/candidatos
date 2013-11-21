@@ -40,11 +40,11 @@ var app = {
 	
 	onOfflineD: function() {
 		app.receivedEvent('onOffLine');
-	}
+	},
 	
 	onOnlineD: function() {
 		app.receivedEvent('onOnline');
-	}
+	},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		if (id=='onOffLine') {
