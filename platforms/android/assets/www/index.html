@@ -21,7 +21,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <title>Candidatos</title>
 	  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
 	  
@@ -52,9 +52,24 @@
 							titles+='<div data-role="collapsible" data-collapsed="false">\n'+
 								'<h3><img src="'+results[i].images.small+'"> '+
 								results[i].party.name+' - '+
-								results[i].first_name+' '+results[i].last_name+'</h3>\n'+
-								
-								'</div>\n';
+								results[i].first_name+' '+results[i].last_name+'</h3>\n';
+							//hv
+							inv_lgl =results[i].investigations;
+							biog = results[i].biography;
+							sup_top = biog.supported_topics; //array
+							tray = results[i].trajectory;
+							posi = results[i].topics_positions;
+							
+							titles+="<h4>Fecha de Nac: </h4>"+biog.born_date+"&nbsp;\n";
+							titles+="<h4>Experiencia Profesional</h4>\n";
+							titles+="<p>"+biog.professional_experience+"</p>\n";
+							titles+="<h4>Propuestas</h4>\n";
+							titles+="<ul>\n";
+							for(j=0;j<sup_top.length;j++) {
+								titles+="<li>"+sup_top[j]+"</li>\n";
+							}
+							titles+="</ul>\n";
+							titles+='</div>\n';
 						}
 						titles+="</div>\n";
 						console.log(titles);
@@ -68,9 +83,9 @@
 	<div data-role="page" id="page1">
 		<div data-theme="a" data-role="header">
 			<div class="app">
-				<h1>PhoneGap</h1>
+				<h1>Candidatos al congreso</h1>
 				<div id="onOffLine">
-					<p>Se necesita conexión a internet</p>
+					
 				</div>
 			</div>
 			
@@ -78,7 +93,20 @@
 		</div>
 	    <div data-role="content">
 	    </div>		
-		
+	    <div data-theme="a" data-role="footer" data-position="fixed">
+	        <div class="ui-grid-a">
+	            <div class="ui-block-a">
+	                <a data-role="button" href="#page1">
+	                    Anterior
+	                </a>
+	            </div>
+	            <div class="ui-block-b">
+	                <a data-role="button" href="#page1">
+	                    Siguiente
+	                </a>
+	            </div>
+	        </div>
+	    </div>		
 	</div>
     </body>
 </html>
