@@ -31,9 +31,9 @@
 	  <!-- jQuery and jQuery Mobile -->
 	  
 	  <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
-	  <script type="text/javascript" src="cordova.js"></script>
-	  <script type="text/javascript" src="consultas.js"></script>	  
+	  <script type="text/javascript" src="cordova.js"></script>	  
 	  <script type="text/javascript" src="js/index.js"></script> 
+	  <script type="text/javascript" src="consultas.js"></script>
 	  <script type="text/javascript" src="jquery.mobile-1.3.1.min.js"></script>
 	  <!-- Extra Codiqa features -->
 	  <script src="codiqa.ext.js"></script>
@@ -47,14 +47,13 @@
 		<div data-theme="a" data-role="header">
 			<div class="app">
 				<h1>Candidatos al congreso</h1>
-				<div id="onOffLine">
-					<script>cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");</script>
-				</div>
 			</div>
 			
 
 		</div>
 	    <div data-role="content">
+	    	<p>Cargando...</p>
+	    	<script>cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");</script>
 	    </div>		
 	    <div data-theme="a" data-role="footer" data-position="fixed">
 	        <div class="ui-grid-a">

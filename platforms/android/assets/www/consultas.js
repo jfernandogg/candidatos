@@ -33,6 +33,8 @@ function descargar_json(url,filePath) {
 				function(data){
 					console.log("cargando json");
 					results = data.results;
+					next = results.next;
+					prev = results.prev;
 					var titles='<div data-role="collapsible-set">\n';
 					for (i=0; i<results.length; i++) {
 						titles+='<div data-role="collapsible" data-collapsed="false">\n'+
@@ -45,7 +47,7 @@ function descargar_json(url,filePath) {
 						sup_top = biog.supported_topics; //array
 						tray = results[i].trajectory;
 						posi = results[i].topics_positions;
-						
+						titles+='<h4>'+results[i].first_name+' '+results[i].last_name+'</h4>\n';
 						titles+="<h4>Fecha de Nac: </h4>"+biog.born_date+"&nbsp;\n";
 						titles+="<h4>Experiencia Profesional</h4>\n";
 						titles+="<p>"+biog.professional_experience+"</p>\n";
@@ -58,9 +60,24 @@ function descargar_json(url,filePath) {
 						titles+='</div>\n';
 					}
 					titles+="</div>\n";
+					$('div[data-role="content"]').empty();
 					$('div[data-role="content"]').append(titles).trigger("create");
+					//TODO agregar evento cargar a los botones anterior y siguiente
+					$('#sig').click( function(){ 
+							$('div[data-role="content"]').empty();
+							$('div[data-role="content"]').html("<p>Cargando...</p>");
+							cargar(next); 
+						} );
+					$('#prev').click( function(){ 
+							$('div[data-role="content"]').empty();
+							$('div[data-role="content"]').html("<p>Cargando...</p>");
+							cargar(prev);	
+						} );
+					//TODO agregar un buscador.
 				} //function(data)
-			); //$.getJSON	        
+			); //$.getJSON	   
+			entry.remove();
+			
 	    },
 	    function(error) {
 	        console.log("download error source " + error.source);
