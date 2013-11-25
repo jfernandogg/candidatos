@@ -16,12 +16,12 @@
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
--->
+-->   
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>   />
         <title>Candidatos</title>
 	  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
 	  
@@ -31,51 +31,14 @@
 	  <!-- jQuery and jQuery Mobile -->
 	  
 	  <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
-	  <script type="text/javascript" src="phonegap.js"></script>	  
+	  <script type="text/javascript" src="cordova.js"></script>
+	  <script type="text/javascript" src="consultas.js"></script>	  
 	  <script type="text/javascript" src="js/index.js"></script> 
 	  <script type="text/javascript" src="jquery.mobile-1.3.1.min.js"></script>
 	  <!-- Extra Codiqa features -->
 	  <script src="codiqa.ext.js"></script>
 			<script type="text/javascript">
 			app.initialize();
-			$.support.cors = true;
-				$.getJSON( 'candidatos.json',{
-							tagmode: "any",
-							format: "json",
-							
-						}).done(
-					function(data){
-						//dt = $.parseJSON(data);
-						results = data.results;
-						var titles='<div data-role="collapsible-set">\n';
-						for (i=0; i<results.length; i++) {
-							titles+='<div data-role="collapsible" data-collapsed="false">\n'+
-								'<h3><img src="'+results[i].images.small+'"> '+
-								results[i].party.name+' - '+
-								results[i].first_name+' '+results[i].last_name+'</h3>\n';
-							//hv
-							inv_lgl =results[i].investigations;
-							biog = results[i].biography;
-							sup_top = biog.supported_topics; //array
-							tray = results[i].trajectory;
-							posi = results[i].topics_positions;
-							
-							titles+="<h4>Fecha de Nac: </h4>"+biog.born_date+"&nbsp;\n";
-							titles+="<h4>Experiencia Profesional</h4>\n";
-							titles+="<p>"+biog.professional_experience+"</p>\n";
-							titles+="<h4>Propuestas</h4>\n";
-							titles+="<ul>\n";
-							for(j=0;j<sup_top.length;j++) {
-								titles+="<li>"+sup_top[j]+"</li>\n";
-							}
-							titles+="</ul>\n";
-							titles+='</div>\n';
-						}
-						titles+="</div>\n";
-						console.log(titles);
-						$('div[data-role="content"]').append(titles).trigger("create");
-					} //function(data)
-				); //$.getJSON
 				
 			</script>	  
     </head>
@@ -85,7 +48,7 @@
 			<div class="app">
 				<h1>Candidatos al congreso</h1>
 				<div id="onOffLine">
-					
+					<script>cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");</script>
 				</div>
 			</div>
 			
