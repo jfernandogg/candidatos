@@ -7,3 +7,7 @@ el servicio publico de congresovisible.org
 
 Descarga pagina por pagina y falta implementar un filtro de busqueda, apenas lo tenga implementado lo subire al google marketplace.
 
+
+Esta aplicacion esta licensiada bajo la licencia GNU/GPL:
+http://www.gnu.org/licenses/gpl.html
+
