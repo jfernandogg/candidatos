@@ -38,7 +38,29 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
-        if (id=='deviceready')
-        	cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");		
+        if (id=='deviceready') {
+        	//$('#gridB').hide();
+        	descargar_partidos();
+        	cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");
+        	$('#partido').change(
+        			function() {
+        				var url = "http://www.congresovisible.org/api/apis/candidatos/?format=json";
+        				var sel = $('#partido').val();
+        				if (sel!=null && sel!=0) {
+							$('div[data-role="content"]').empty();
+							$('div[data-role="content"]').html("<p>Cargando...</p>");
+							console.log('Cargando con filtro: '+next);        					
+        					cargar(url+'&partido_politico='+sel);
+        				}
+        				if (sel==0) {
+							$('div[data-role="content"]').empty();
+							$('div[data-role="content"]').html("<p>Cargando...</p>");
+							console.log('Cargando con filtro: '+next);
+							cargar(url);
+        				}
+        			}
+        	);
+        }
+        			
     }
 };

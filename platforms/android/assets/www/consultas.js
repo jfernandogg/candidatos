@@ -4,17 +4,17 @@
 function cargar(url) {
 	var fp = '/sdcard/'+makeid()+'.json';
 	if (url==null || url=="candidatos.json") {
-		descargar_json("candidatos.json",fp);
+		descargar_candidatos("candidatos.json",fp);
 		fp="candidatos.json";
 	}
 	else
-		descargar_json(url,fp);
+		descargar_candidatos(url,fp);
 	//Load json via files plugin	
 
 	
 }
 
-function descargar_json(url,filePath) {
+function descargar_candidatos(url,filePath) {
 	// !! Assumes filePath is a valid path on the device
 	if (url=="candidatos.json")
 		return "candidatos.json";
@@ -93,7 +93,41 @@ function descargar_json(url,filePath) {
 	);	
 }
 
+function descargar_partidos() {
 
+	var fileTransfer = new FileTransfer();
+	var uri = encodeURI("http://www.congresovisible.org/api/apis/partidos/?format=json");
+	var filePath = '/sdcard/'+makeid()+'.json';
+	fileTransfer.download(
+	    uri,
+	    filePath,
+	    function(entry) {
+	        console.log("download complete: " + entry.fullPath);
+			$.getJSON( 'file://'+filePath,{
+				tagmode: "any",
+				format: "json",
+			}).done(
+				function(data){
+					var results = data.results;
+					console.log("cargando json partidos");
+					$('#partido').children('option').remove();
+					$('#partido').append('<option value="0">Todos</option>').trigger("create");
+					for (i=0; i<results.length;i++){
+						$('#partido').append('<option value="'+results[i].id+'">'+results[i].name+'</option>\n').trigger("create");
+					}
+				} //function(data)
+			); //$.getJSON	   
+			entry.remove();
+			
+	    },
+	    function(error) {
+	        console.log("download error source " + error.source);
+	        console.log("download error target " + error.target);
+	        console.log("upload error code" + error.code);
+	    },
+	    false
+	);	
+}
 
 function makeid()
 {
