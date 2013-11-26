@@ -33,8 +33,8 @@ function descargar_json(url,filePath) {
 				function(data){
 					console.log("cargando json");
 					results = data.results;
-					next = data.next;
-					prev = data.previous;
+					next = results.next;
+					prev = results.prev;
 					var titles='<div data-role="collapsible-set">\n';
 					for (i=0; i<results.length; i++) {
 						titles+='<div data-role="collapsible" data-collapsed="false">\n'+
@@ -62,21 +62,16 @@ function descargar_json(url,filePath) {
 					titles+="</div>\n";
 					$('div[data-role="content"]').empty();
 					$('div[data-role="content"]').append(titles).trigger("create");
-					
-					$('#next').click( function(){ 
+					//TODO agregar evento cargar a los botones anterior y siguiente
+					$('#sig').click( function(){ 
 							$('div[data-role="content"]').empty();
 							$('div[data-role="content"]').html("<p>Cargando...</p>");
-							console.log('Cargando en next: '+next);
 							cargar(next); 
 						} );
 					$('#prev').click( function(){ 
-							if (prev!=null) {
-								$('div[data-role="content"]').empty();
-								$('div[data-role="content"]').html("<p>Cargando...</p>");
-								console.log('Cargando en prev: '+prev);
-								cargar(prev);	
-							}
-							else console.log("No hay mas paginas");
+							$('div[data-role="content"]').empty();
+							$('div[data-role="content"]').html("<p>Cargando...</p>");
+							cargar(prev);	
 						} );
 					//TODO agregar un buscador.
 				} //function(data)

@@ -38,5 +38,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
+        if (id=='deviceready')
+        	cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");		
     }
 };
