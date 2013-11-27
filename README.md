@@ -11,3 +11,10 @@ Descarga pagina por pagina y falta implementar un filtro de busqueda, apenas lo 
 Esta aplicacion esta licensiada bajo la licencia GNU/GPL:
 http://www.gnu.org/licenses/gpl.html
 
+Basicamente la presentacion esta en el index.html en platforms/android/assets/www
+La logica esta en platforms/android/assets/www/consultas.js y el index.js
+
+Disfrutenla.
+
+Juan Fernando Gallego Gomez <juan.gallego@gmail.com>
+

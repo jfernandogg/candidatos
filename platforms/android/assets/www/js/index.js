@@ -38,8 +38,9 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
+        this.usePath();
         if (id=='deviceready') {
-        	//$('#gridB').hide();
+        	//$('#gridB').hide();        	
         	descargar_partidos();
         	cargar("http://www.congresovisible.org/api/apis/candidatos/?format=json");
         	$('#partido').change(
@@ -62,5 +63,21 @@ var app = {
         	);
         }
         			
-    }
+    },
+    
+    usePath:
+     function() {
+    	console.log('UsePath: obteniendo temp path');
+    	window.requestFileSystem( LocalFileSystem.TEMPORARY, 0, 
+			function(f){
+				console.log('Temp Path is: '+f.root.fullPath);
+				app.tmpPath = f.root.fullPath;
+    		}, 
+    		function(e){
+    			console.log('Error al obtener el path temporal: '+e.target.error.code);
+    		}
+    	);
+    	console.log('usePath: Temp Path debio quedarn en '+app.tmpPath);
+     },
+     tmpPath: ""
 };

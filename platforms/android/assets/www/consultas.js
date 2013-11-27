@@ -1,14 +1,7 @@
 
-
-
 function cargar(url) {
-	var fp = '/sdcard/'+makeid()+'.json';
-	if (url==null || url=="candidatos.json") {
-		descargar_candidatos("candidatos.json",fp);
-		fp="candidatos.json";
-	}
-	else
-		descargar_candidatos(url,fp);
+		app.usePath();
+		descargar_candidatos( url,app.tmpPath+'/'+makeid() );
 	//Load json via files plugin	
 
 	
@@ -26,7 +19,7 @@ function descargar_candidatos(url,filePath) {
 	    filePath,
 	    function(entry) {
 	        console.log("download complete: " + entry.fullPath);
-			$.getJSON( 'file://'+filePath,{
+			$.getJSON( filePath,{
 				tagmode: "any",
 				format: "json",
 			}).done(
@@ -39,7 +32,6 @@ function descargar_candidatos(url,filePath) {
 					for (i=0; i<results.length; i++) {
 						titles+='<div data-role="collapsible" data-collapsed="false">\n'+
 							'<h3><img src="'+results[i].images.small+'"> '+
-							results[i].party.name+' - '+
 							results[i].first_name+' '+results[i].last_name+'</h3>\n';
 						//hv
 						inv_lgl =results[i].investigations;
@@ -47,6 +39,7 @@ function descargar_candidatos(url,filePath) {
 						sup_top = biog.supported_topics; //array
 						tray = results[i].trajectory;
 						posi = results[i].topics_positions;
+						titles+='<h4>'+results[i].party.name+'</h4>\n';
 						titles+='<h4>'+results[i].first_name+' '+results[i].last_name+'</h4>\n';
 						titles+="<h4>Fecha de Nac: </h4>"+biog.born_date+"&nbsp;\n";
 						titles+="<h4>Experiencia Profesional</h4>\n";
@@ -97,13 +90,15 @@ function descargar_partidos() {
 
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI("http://www.congresovisible.org/api/apis/partidos/?format=json");
-	var filePath = '/sdcard/'+makeid()+'.json';
+	app.usePath();
+	var filePath = app.tmpPath+'/'+makeid();
+
 	fileTransfer.download(
 	    uri,
 	    filePath,
 	    function(entry) {
 	        console.log("download complete: " + entry.fullPath);
-			$.getJSON( 'file://'+filePath,{
+			$.getJSON( filePath,{
 				tagmode: "any",
 				format: "json",
 			}).done(
@@ -118,7 +113,6 @@ function descargar_partidos() {
 				} //function(data)
 			); //$.getJSON	   
 			entry.remove();
-			
 	    },
 	    function(error) {
 	        console.log("download error source " + error.source);
